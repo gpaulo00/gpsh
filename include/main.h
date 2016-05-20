@@ -18,6 +18,8 @@
 
 bool touchInBox(touchPosition touch, int x, int y, int w, int h);
 void keyboard(touchPosition touch, int *kb);
+void abc(int *kb);
+void shift(int*kb);
 
 extern const struct {
  unsigned int width;

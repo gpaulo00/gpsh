@@ -11,6 +11,31 @@ bool touchInBox(touchPosition touch, int x, int y, int w, int h){
     }
 }
 
+void abc(int *kb){
+    if(*kb==2 || *kb==3) {
+        *kb=0;
+    } else {
+        *kb=2;
+    }
+}
+
+void shift(int *kb) {
+    switch(*kb){
+        case 0 :
+            *kb=1;
+            break;
+        case 1 :
+            *kb=0;
+            break;
+        case 2 :
+            *kb=3;
+            break;
+        case 3 :
+            *kb=2;
+            break;
+    }
+}
+
 void printf_kb(char let[5], int kb) {
     switch(kb){
         case 0 :
@@ -50,25 +75,11 @@ void keyboard(touchPosition touch, int *kb) {
     else if(touchInBox(touch, 224,151, 31,30)){printf_kb("kK)$", *kb);}
     else if(touchInBox(touch, 256,151, 31,30)){printf_kb("lL-£", *kb);}
     else if(touchInBox(touch, 288,151, 31,30)){printf_kb("ñÑ\\¥", *kb);}
-    else if (touchInBox(touch, 0,182, 31,30)){
-        switch(*kb){
-            case 0 :
-                *kb=1;
-                break;
-            case 1 :
-                *kb=0;
-                break;
-            case 2 :
-                *kb=3;
-                break;
-            case 3 :
-                *kb=2;
-                break;
-        }
-    } else if (touchInBox(touch, 0,213, 62,30)){
-        if(*kb==2 || *kb==3) { *kb=0; }
-        else if(*kb==0 || *kb==1) { *kb=2; }
-    } else if(touchInBox(touch, 32,182, 31,30)){printf_kb("zZ!·", *kb);}
+    
+    else if (touchInBox(touch, 0,182, 31,30)){ shift(kb); }
+    else if (touchInBox(touch, 0,213, 62,30)){ abc(kb); }
+    
+    else if(touchInBox(touch, 32,182, 31,30)){printf_kb("zZ!·", *kb);}
     else if(touchInBox(touch, 64,182, 31,30)){printf_kb("xX;-", *kb);}
     else if(touchInBox(touch, 96,182, 31,30)){printf_kb("cC:+", *kb);}
     else if(touchInBox(touch, 128,182, 31,30)){printf_kb("vV'=", *kb);}
