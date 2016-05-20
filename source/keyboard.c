@@ -1,58 +1,5 @@
 #include <main.h>
 
-bool touchInBox(touchPosition touch, int x, int y, int w, int h){
-    int tx=touch.px;
-    int ty=touch.py;
-    u32 kDown = hidKeysDown();
-    if (kDown & KEY_TOUCH && tx > x && tx < x+w && ty > y && ty < y+h){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-void abc(int *kb){
-    if(*kb==2 || *kb==3) {
-        *kb=0;
-    } else {
-        *kb=2;
-    }
-}
-
-void shift(int *kb) {
-    switch(*kb){
-        case 0 :
-            *kb=1;
-            break;
-        case 1 :
-            *kb=0;
-            break;
-        case 2 :
-            *kb=3;
-            break;
-        case 3 :
-            *kb=2;
-            break;
-    }
-}
-
-void printf_kb(char let[5], int kb) {
-    switch(kb){
-        case 0 :
-            printf("%c", let[0]);
-            break;
-        case 1 :
-            printf("%c", let[1]);
-            break;
-        case 2 :
-            printf("%c", let[2]);
-            break;
-        case 3 :
-            printf("%c", let[3]);
-            break;
-    }
-}
-
 void keyboard(touchPosition touch, int *kb) {
     if (touchInBox(touch, 0,120, 31,30)){printf_kb("qQ11", *kb);} //Letras
     else if(touchInBox(touch, 32,120, 31,30)){printf_kb("wW22", *kb);}
@@ -87,9 +34,11 @@ void keyboard(touchPosition touch, int *kb) {
     else if(touchInBox(touch, 192,182, 31,30)){printf_kb("nN?~", *kb);}
     else if(touchInBox(touch, 224,182, 31,30)){printf_kb("mM/|", *kb);}
 
-    else if(touchInBox(touch, 256,182, 62,30)){printf("\b \b");}               //Back
+    else if(touchInBox(touch, 256,182, 62,30)){
+        backspace();
+    }               //Back
 
-    else if(touchInBox(touch, 64,213, 160,30)){printf(" ");}        //Space
+    else if(touchInBox(touch, 64,213, 160,30)){printf(" "); write_kb++;}        //Space
     
     else if(touchInBox(touch, 224,151, 31,30)){printf_kb(",,..", *kb);}
     //~ else if(touchInBox(touch, 256,151, 62,30)){ }               //Enter

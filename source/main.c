@@ -29,6 +29,7 @@ int main(int argc, char **argv)
     
     // Main loop
     int teclado=0;
+    write_kb=0;
     touchPosition touch;
     
     while (aptMainLoop()) {

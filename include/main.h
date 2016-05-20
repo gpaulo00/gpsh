@@ -16,10 +16,20 @@
 #define GRAY    "\x1b[0;37m"
 #define WHITE   "\x1b[1;37m"
 
+//touch.c
 bool touchInBox(touchPosition touch, int x, int y, int w, int h);
+
+//keyboard.c
 void keyboard(touchPosition touch, int *kb);
+
+//keyboard_func.c
 void abc(int *kb);
 void shift(int*kb);
+void backspace();
+void printf_kb(char let[5], int kb);
+
+//Variables
+int write_kb;
 
 extern const struct {
  unsigned int width;
