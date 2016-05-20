@@ -26,7 +26,7 @@ void shift(int *kb) {
 }
 
 void backspace() {
-    if(write_kb > 0) {printf("\b \b"); write_kb--}
+    if(write_kb > 0) {printf("\b \b"); write_kb--; }
 }
     
 void printf_kb(char let[5], int kb) {
