@@ -40,16 +40,16 @@ void keyboard(touchPosition touch, int *kb) {
     else if(touchInBox(touch, 256,120, 31,30)){printf_kb("oO99", *kb);}
     else if(touchInBox(touch, 288,120, 31,30)){printf_kb("pP00", *kb);}
     
-    else if (touchInBox(touch, 0,151, 31,30)){printf("a");}
-    else if(touchInBox(touch, 32,151, 31,30)){printf("s");}
-    else if(touchInBox(touch, 64,151, 31,30)){printf("d");}
-    else if(touchInBox(touch, 96,151, 31,30)){printf("f");}
-    else if(touchInBox(touch, 128,151, 31,30)){printf("g");}
-    else if(touchInBox(touch, 160,151, 31,30)){printf("h");}
-    else if(touchInBox(touch, 192,151, 31,30)){printf("j");}
-    else if(touchInBox(touch, 224,151, 31,30)){printf("k");}
-    else if(touchInBox(touch, 256,151, 31,30)){printf("l");}
-    else if(touchInBox(touch, 288,151, 31,30)){printf("ñ");}
+    else if (touchInBox(touch, 0,151, 31,30)){printf_kb("aA@^", *kb);}
+    else if(touchInBox(touch, 32,151, 31,30)){printf_kb("sS#[", *kb);}
+    else if(touchInBox(touch, 64,151, 31,30)){printf_kb("dD€]", *kb);}
+    else if(touchInBox(touch, 96,151, 31,30)){printf_kb("fF%{", *kb);}
+    else if(touchInBox(touch, 128,151, 31,30)){printf_kb("gG&}", *kb);}
+    else if(touchInBox(touch, 160,151, 31,30)){printf_kb("hH*<", *kb);}
+    else if(touchInBox(touch, 192,151, 31,30)){printf_kb("jJ(>", *kb);}
+    else if(touchInBox(touch, 224,151, 31,30)){printf_kb("kK)$", *kb);}
+    else if(touchInBox(touch, 256,151, 31,30)){printf_kb("lL-£", *kb);}
+    else if(touchInBox(touch, 288,151, 31,30)){printf_kb("ñÑ\\¥", *kb);}
     else if (touchInBox(touch, 0,182, 31,30)){
         switch(*kb){
             case 0 :
@@ -68,18 +68,18 @@ void keyboard(touchPosition touch, int *kb) {
     } else if (touchInBox(touch, 0,213, 62,30)){
         if(*kb==2 || *kb==3) { *kb=0; }
         else if(*kb==0 || *kb==1) { *kb=2; }
-    } else if(touchInBox(touch, 32,182, 31,30)){printf("z");}
-    else if(touchInBox(touch, 64,182, 31,30)){printf("x");}
-    else if(touchInBox(touch, 96,182, 31,30)){printf("c");}
-    else if(touchInBox(touch, 128,182, 31,30)){printf("v");}
-    else if(touchInBox(touch, 160,182, 31,30)){printf("b");}
-    else if(touchInBox(touch, 192,182, 31,30)){printf("n");}
-    else if(touchInBox(touch, 224,182, 31,30)){printf("m");}
+    } else if(touchInBox(touch, 32,182, 31,30)){printf_kb("zZ!·", *kb);}
+    else if(touchInBox(touch, 64,182, 31,30)){printf_kb("xX;-", *kb);}
+    else if(touchInBox(touch, 96,182, 31,30)){printf_kb("cC:+", *kb);}
+    else if(touchInBox(touch, 128,182, 31,30)){printf_kb("vV'=", *kb);}
+    else if(touchInBox(touch, 160,182, 31,30)){printf_kb("bB\"_", *kb);}
+    else if(touchInBox(touch, 192,182, 31,30)){printf_kb("nN?~", *kb);}
+    else if(touchInBox(touch, 224,182, 31,30)){printf_kb("mM/|", *kb);}
 
     else if(touchInBox(touch, 256,182, 62,30)){printf("\b \b");}               //Back
 
     else if(touchInBox(touch, 64,213, 160,30)){printf(" ");}        //Space
     
-    else if(touchInBox(touch, 224,151, 31,30)){printf(",");}
+    else if(touchInBox(touch, 224,151, 31,30)){printf_kb(",,..", *kb);}
     //~ else if(touchInBox(touch, 256,151, 62,30)){ }               //Enter
 }
