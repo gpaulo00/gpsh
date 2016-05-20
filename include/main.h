@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <sf2d.h>
 
-#define VERSION "0.1"
+#define VERSION "0.2"
 
 #define BLACK   "\x1b[0;30m"
 #define GRAY_   "\x1b[1;30m"
@@ -20,16 +20,17 @@
 bool touchInBox(touchPosition touch, int x, int y, int w, int h);
 
 //keyboard.c
-void keyboard(touchPosition touch, int *kb);
+void keyboard(touchPosition touch);
 
 //keyboard_func.c
-void abc(int *kb);
-void shift(int*kb);
+void abc();
+void shift();
 void backspace();
-void printf_kb(char let[5], int kb);
+void printf_kb(char let[5]);
 
-//Variables
+//Variables Globales
 int write_kb;
+int teclado;
 
 extern const struct {
  unsigned int width;

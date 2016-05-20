@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     printf(WHITE);
     
     // Main loop
-    int teclado=0;
+    teclado=0;
     write_kb=0;
     touchPosition touch;
     
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
         }
         hidTouchRead(&touch);
 
-        keyboard(touch, &teclado);
+        keyboard(touch);
 
         sf2d_start_frame(GFX_BOTTOM, GFX_LEFT);
         switch(teclado){
