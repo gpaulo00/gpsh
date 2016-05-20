@@ -11,17 +11,34 @@ bool touchInBox(touchPosition touch, int x, int y, int w, int h){
     }
 }
 
+void printf_kb(char let[5], int kb) {
+    switch(kb){
+        case 0 :
+            printf("%c", let[0]);
+            break;
+        case 1 :
+            printf("%c", let[1]);
+            break;
+        case 2 :
+            printf("%c", let[2]);
+            break;
+        case 3 :
+            printf("%c", let[3]);
+            break;
+    }
+}
+
 void keyboard(touchPosition touch, int *kb) {
-    if (touchInBox(touch, 0,120, 31,30)){printf("q");} //Letras
-    else if(touchInBox(touch, 32,120, 31,30)){printf("w");}
-    else if(touchInBox(touch, 64,120, 31,30)){printf("e");}
-    else if(touchInBox(touch, 96,120, 31,30)){printf("r");}
-    else if(touchInBox(touch, 128,120, 31,30)){printf("t");}
-    else if(touchInBox(touch, 160,120, 31,30)){printf("y");}
-    else if(touchInBox(touch, 192,120, 31,30)){printf("u");}
-    else if(touchInBox(touch, 224,120, 31,30)){printf("i");}
-    else if(touchInBox(touch, 256,120, 31,30)){printf("o");}
-    else if(touchInBox(touch, 288,120, 31,30)){printf("p");}
+    if (touchInBox(touch, 0,120, 31,30)){printf_kb("qQ11", *kb);} //Letras
+    else if(touchInBox(touch, 32,120, 31,30)){printf_kb("wW22", *kb);}
+    else if(touchInBox(touch, 64,120, 31,30)){printf_kb("eE33", *kb);}
+    else if(touchInBox(touch, 96,120, 31,30)){printf_kb("rR44", *kb);}
+    else if(touchInBox(touch, 128,120, 31,30)){printf_kb("tT55", *kb);}
+    else if(touchInBox(touch, 160,120, 31,30)){printf_kb("yY66", *kb);}
+    else if(touchInBox(touch, 192,120, 31,30)){printf_kb("uU77", *kb);}
+    else if(touchInBox(touch, 224,120, 31,30)){printf_kb("iI88", *kb);}
+    else if(touchInBox(touch, 256,120, 31,30)){printf_kb("oO99", *kb);}
+    else if(touchInBox(touch, 288,120, 31,30)){printf_kb("pP00", *kb);}
     
     else if (touchInBox(touch, 0,151, 31,30)){printf("a");}
     else if(touchInBox(touch, 32,151, 31,30)){printf("s");}

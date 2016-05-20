@@ -34,9 +34,9 @@ DATA		:=	data
 INCLUDES	:=	include
 #ROMFS		:=	romfs
 
-APP_TITLE := Test
-APP_DESCRIPTION := A simple test
-APP_AUTHOR := Gustavo Paulo
+APP_TITLE := GP Shell
+APP_DESCRIPTION := A linux-like command prompt for 3ds.
+APP_AUTHOR := gpaulo00
 
 #---------------------------------------------------------------------------------
 # options for code generation
