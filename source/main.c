@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     consoleInit(GFX_TOP, &top);
     
     consoleSelect(&top);
-    printf(BLUE "GP Shell" VERSION "\n");
+    printf(BLUE "GP Shell v" VERSION "\n");
     printf(CYAN "Gustavo Paulo ");
     printf(YELLOW "<gustavo.paulo.segura@gmail.com>\n"); // \x1b[y;xH
     printf(GREEN "# ");
@@ -38,6 +38,9 @@ int main(int argc, char **argv)
         if (kDown & KEY_START) {break;}
         else if(kDown & KEY_B) {printf("\b \b");}
         else if(kDown & KEY_Y) { // Key Y = Shift
+            if(teclado==2 || teclado==3) { teclado=0; }
+            else if(teclado==0 || teclado==1) { teclado=2; }
+        } else if(kDown & KEY_X) { //Key X = 123/ABC
             switch(teclado){
                 case 0 :
                     teclado=1;
@@ -52,12 +55,9 @@ int main(int argc, char **argv)
                     teclado=2;
                     break;
             }
-        } else if(kDown & KEY_X) { //Key X = 123/ABC
-            if(teclado==2 || teclado==3) { teclado=0; }
-            else if(teclado==0 || teclado==1) { teclado=2; }
         }
         hidTouchRead(&touch);
-.
+
         keyboard(touch, &teclado);
 
         sf2d_start_frame(GFX_BOTTOM, GFX_LEFT);
