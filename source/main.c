@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     consoleInit(GFX_TOP, &top);
     
     consoleSelect(&top);
-    printf(BLUE "GP Shell v" VERSION "\n");
+    printf(CYAN "GP Shell v" VERSION "\n");
     printf(CYAN "Gustavo Paulo ");
     printf(YELLOW "<gustavo.paulo.segura@gmail.com>\n"); // \x1b[y;xH
     printf(GREEN "# ");
@@ -37,12 +37,9 @@ int main(int argc, char **argv)
         hidScanInput();
         u32 kDown = hidKeysDown();
         if (kDown & KEY_START) {break;}
-        else if(kDown & KEY_B) {printf("\b \b");}
-        else if(kDown & KEY_Y) { // Key Y = ABC/123
-            abc(&teclado);
-        } else if(kDown & KEY_X) { //Key X = Shift
-            shift(&teclado);
-        }
+        else if(kDown & KEY_B) {printf("\b \b");}  //Key B = Backspace
+        else if(kDown & KEY_Y) { abc(&teclado); } // Key Y = ABC/123
+        else if(kDown & KEY_X) { shift(&teclado); }  //Key X = Shift
         hidTouchRead(&touch);
 
         keyboard(touch);
