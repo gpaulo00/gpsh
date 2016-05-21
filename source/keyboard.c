@@ -1,7 +1,7 @@
 #include <main.h>
 
 //Arreglar punto medio, cierra corchete, libra esterlina, yen, tilde, euro, \
-// Testing yen, \, punto medio, cierra corchete, tilde, libra
+// Testing yen, \, punto medio, cierra corchete, tilde, libra, euro
 
 void keyboard(touchPosition touch) {
     if (touchInBox(touch, 0,120, 31,30)){printf_kb("qQ11");} //Letras
@@ -17,7 +17,7 @@ void keyboard(touchPosition touch) {
     
     else if (touchInBox(touch, 0,151, 31,30)){printf_kb("aA@^");}
     else if(touchInBox(touch, 32,151, 31,30)){printf_kb("sS#[");}
-    else if(touchInBox(touch, 64,151, 31,30)){printf_kb("dD€\x5d");} //Testing
+    else if(touchInBox(touch, 64,151, 31,30)){printf_kb("dD\x80\x5d");} //Testing
     else if(touchInBox(touch, 96,151, 31,30)){printf_kb("fF%{");}
     else if(touchInBox(touch, 128,151, 31,30)){printf_kb("gG&}");}
     else if(touchInBox(touch, 160,151, 31,30)){printf_kb("hH*<");}
