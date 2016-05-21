@@ -17,11 +17,15 @@ int main(int argc, char **argv)
     sf2d_texture *sim1 = sf2d_create_texture_mem_RGBA8(simbolos1.pixel_data, simbolos1.width, simbolos1.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
     sf2d_texture *sim2 = sf2d_create_texture_mem_RGBA8(simbolos2.pixel_data, simbolos2.width, simbolos2.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
     
-    PrintConsole top, top2;
+    PrintConsole top;
     consoleInit(GFX_TOP, &top);
-    consoleInit(GFX_TOP, &top2);
     
-    consoleSetWindow(&top2,48,0,3,3);
+    //Debug mode
+    #if DEBUG_MODE == 1
+        PrintConsole top2;
+        consoleInit(GFX_TOP, &top2);
+        consoleSetWindow(&top2,48,0,3,3);
+    #endif
     
     consoleSelect(&top);
     printf(CYAN "GP Shell v" VERSION "\n");
@@ -32,16 +36,19 @@ int main(int argc, char **argv)
     // Main loop
     teclado=0;
     write_kb=0;
+    result=0;
+    closeApp=false;
     touchPosition touch;
     
-    while (aptMainLoop()) {
+    while (aptMainLoop() && !closeApp) {
         //Scan all the inputs. This should be done once for each frame
         hidScanInput();
         u32 kDown = hidKeysDown();
         if (kDown & KEY_START) {break;}
-        else if(kDown & KEY_B) {printf("\b \b");}  //Key B = Backspace
-        else if(kDown & KEY_Y) { abc(&teclado); } // Key Y = ABC/123
-        else if(kDown & KEY_X) { shift(&teclado); }  //Key X = Shift
+        else if(kDown & KEY_B) {printf("\b \b");}       // Key B = Backspace
+        else if(kDown & KEY_Y) { abc(&teclado); }       // Key Y = ABC/123
+        else if(kDown & KEY_X) { shift(&teclado); }     // Key X = Shift
+        else if(kDown & KEY_A) { enter(); }             // Key A = Enter
         hidTouchRead(&touch);
 
         keyboard(touch);
@@ -63,8 +70,11 @@ int main(int argc, char **argv)
         }
         sf2d_end_frame();
         
-        consoleSelect(&top2);
-        printf("\r%i", write_kb);
+        #if DEBUG_MODE == 1
+            consoleSelect(&top2);
+            printf("\r%i", write_kb);
+            printf("\x1b[2;0H%i", result);
+        #endif
         
         consoleSelect(&top);
         sf2d_swapbuffers();

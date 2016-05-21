@@ -57,7 +57,17 @@ void enter(){
     //Process command
     printf("\n");
     if(prefix("hello",command)) {
-        result = hello();
+        result = hello();}
+    //~ } else if(prefix("echo",command)) {
+        //~ strncpy(args, command+5, 42);
+        //~ result = echo();
+    //~ }
+    else if(prefix("exit",command)) {
+        result = close();}
+    else {
+        printf(RED "Command not found\n");
+        printf(WHITE);
+        result = -1;
     }
     write_kb = 0;
     memset(command,0,46);

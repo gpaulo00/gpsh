@@ -13,6 +13,7 @@ bool touchInBox(touchPosition touch, int x, int y, int w, int h){
 
 void prompt(){
     printf(GREEN "# ");
+    gfxFlushBuffers();
     printf(WHITE);
 }
 
@@ -20,3 +21,8 @@ bool prefix(const char *pre, const char *str)
 {
     return strncmp(pre, str, strlen(pre)) == 0;
 }
+
+//~ char * getargs(char string[47], int lcom){
+    //~ char *res;
+    //~ strncpy(res,string+lcom,47-lcom);
+//~ }
