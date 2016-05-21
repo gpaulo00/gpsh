@@ -17,15 +17,17 @@ int main(int argc, char **argv)
     sf2d_texture *sim1 = sf2d_create_texture_mem_RGBA8(simbolos1.pixel_data, simbolos1.width, simbolos1.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
     sf2d_texture *sim2 = sf2d_create_texture_mem_RGBA8(simbolos2.pixel_data, simbolos2.width, simbolos2.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
     
-    PrintConsole top;
+    PrintConsole top, top2;
     consoleInit(GFX_TOP, &top);
+    consoleInit(GFX_TOP, &top2);
+    
+    consoleSetWindow(&top2,48,0,3,3);
     
     consoleSelect(&top);
     printf(CYAN "GP Shell v" VERSION "\n");
     printf(CYAN "Gustavo Paulo ");
     printf(YELLOW "<gustavo.paulo.segura@gmail.com>\n"); // \x1b[y;xH
-    printf(GREEN "# ");
-    printf(WHITE);
+    prompt();
     
     // Main loop
     teclado=0;
@@ -60,6 +62,10 @@ int main(int argc, char **argv)
                 break;
         }
         sf2d_end_frame();
+        
+        consoleSelect(&top2);
+        printf("\r%i", write_kb);
+        
         consoleSelect(&top);
         sf2d_swapbuffers();
     }
