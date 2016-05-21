@@ -1,6 +1,7 @@
 #include <3ds.h>
 #include <stdio.h>
 #include <sf2d.h>
+#include <string.h>
 
 #define VERSION "0.2"
 
@@ -16,21 +17,29 @@
 #define GRAY    "\x1b[0;37m"
 #define WHITE   "\x1b[1;37m"
 
-//touch.c
+//general_functions.c
 bool touchInBox(touchPosition touch, int x, int y, int w, int h);
+void prompt();
+bool prefix(const char *pre, const char *str);
 
 //keyboard.c
 void keyboard(touchPosition touch);
 
-//keyboard_func.c
+//keyboard_functions.c
 void abc();
 void shift();
 void backspace();
 void printf_kb(char let[5]);
+void enter();
+
+//comands.c
+int hello();
 
 //Variables Globales
 int write_kb;
 int teclado;
+char command[47];
+int result;
 
 extern const struct {
  unsigned int width;
