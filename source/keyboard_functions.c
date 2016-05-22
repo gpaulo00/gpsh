@@ -31,6 +31,7 @@ int backspace() {
         write_kb--;
         c_aux = realloc(command,(c_size-1)*sizeof(char));
         if(c_aux==NULL){
+            printf(RED "Error allocating dynamic memory\n");
             closeApp=true;
             return 2;
         }
@@ -60,6 +61,7 @@ int printf_kb(char let[5]) {
     printf("%c", c);
     c_aux = realloc(command,(c_size+1)*sizeof(char));
     if(c_aux==NULL){
+        printf(RED "Error allocating dynamic memory\n");
         closeApp=true;
         return 2;
     }
@@ -69,34 +71,69 @@ int printf_kb(char let[5]) {
     return 0;
 }
 
-void enter(){
+int enter(){
     //Process command
     printf("\n");
-    if(prefix("hello",command)) {
-        result = hello();
-    //~ } else if(prefix("echo",command)) {
-        //~ strncpy(args, command+5, 42);
-        //~ result = echo();
-    //~ }
-    }else if(prefix("exit",command)) {
-        result = close();
-    }else if(prefix("gpaulo",command)) {
-        result = gpaulo();
-    }else if(write_kb==0){
-        
-    } else {
-        printf(RED "Command not found\n");
-        printf(WHITE);
-        result = -1;
+    char **tokens, **copy, **args;
+    
+    if(write_kb!=0){
+        char *cmd = malloc(sizeof(char)*strlen(command));
+        strcpy(cmd, command);
+        copy = str_split(command, ' ');
+        if (copy) {
+            int num;
+            
+            for (num = 0; *(copy + num); num++) {
+                #if DEBUG_MODE == 1
+                    printf("copy[%i]: %s\n", num, *(copy+num));
+                #endif
+                free(*(copy + num));
+            }
+            free(copy);
+
+            tokens = str_split(cmd, ' ');
+            if(num>0) {
+                args = malloc(sizeof(char*) * num-1);
+                if(args==NULL){printf(RED "Error allocating dynamic memory\n"); closeApp=true; return 2;}
+                
+                for(int i=0;i<num;i++){
+                    #if DEBUG_MODE == 1
+                        printf("args[%i]: %s\n", i, *(tokens + (i+1)));
+                    #endif
+                    *(args + i)=*(tokens + (i+1));
+                }
+            } else {
+                args = malloc(sizeof(char*));
+            }
+            num--;
+            #if DEBUG_MODE == 1
+                printf("num: %i\n", num);
+            #endif
+            if(strcmp(*tokens,"hello")==0){
+                result = hello(num, args);
+            } else if(strcmp(*tokens,"echo")==0){
+                result = echo(num, args);
+            } else if(strcmp(*tokens,"exit")==0 || strcmp(*tokens,"quit")==0){
+                result = quit(num, args);
+            } else if(strcmp(*tokens,"gpaulo")==0){
+                result = gpaulo(num, args);
+            } else {
+                printf(RED "Command not found\n");
+                result = -1;
+            }
+        }
     }
     write_kb = 0;
     c_size = 1;
     c_aux = malloc(sizeof(char));
     if(c_aux == NULL){
-        closeApp=true;
+        printf(RED "Error allocating dynamic memory\n");
+        closeApp = true;
+        return 3;
     } else {
         command = c_aux;
-        printf(GREEN "# ");
-        printf(WHITE);
     }
+    printf(GREEN "# ");
+    printf(WHITE);
+    return 0;
 }

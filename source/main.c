@@ -34,15 +34,16 @@ int main(int argc, char **argv)
     printf(WHITE);
     prompt();
     
-    // Main loop
-    teclado=0;
-    result=0;
-    closeApp=false;
+    // Inicializar Variables
+    teclado = 0;
+    result = 0;
+    closeApp = false;
     touchPosition touch;
+    srand(time(NULL));
 
-    write_kb=0;
-    c_size=1;
-    command=malloc(sizeof(char));
+    write_kb = 0;
+    c_size = 1;
+    command = malloc(sizeof(char));
     if(command == NULL){
         printf(RED "Error allocating dynamic memory\n");
         closeApp=true;

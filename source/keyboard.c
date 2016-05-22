@@ -40,7 +40,7 @@ void keyboard(touchPosition touch) {
 
     else if(touchInBox(touch, 256,182, 62,30)){ backspace(); } //Back
 
-    else if(touchInBox(touch, 64,213, 160,30)){printf(" "); write_kb++;}        //Space
+    else if(touchInBox(touch, 64,213, 160,30)){ printf_kb("    "); }        //Space
     
     else if(touchInBox(touch, 224,213, 31,30)){printf_kb(",,..");}
     else if(touchInBox(touch, 256,213, 62,30)){ enter(); }               //Enter

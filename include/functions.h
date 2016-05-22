@@ -1,6 +1,7 @@
 // Funciones externas de todos los archivos
 
 //general_functions.c
+char** str_split(char* a_str, const char a_delim);
 bool touchInBox(touchPosition touch, int x, int y, int w, int h);
 void prompt();
 bool prefix(const char *pre, const char *str);
@@ -14,10 +15,10 @@ void abc();
 void shift();
 int backspace();
 int printf_kb(char let[5]);
-void enter();
+int enter();
 
 //comands.c
-int hello();
-int close();
-int echo(char string[42]);
-int gpaulo();
+int hello(int argc, char **argv);
+int quit(int argc, char **argv);
+int echo(int argc, char **argv);
+int gpaulo(int argc, char **argv);

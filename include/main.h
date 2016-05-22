@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define VERSION     "0.2"
+#define VERSION     "0.3"
 #define DEBUG_MODE  0
 
 #define BLACK   "\x1b[0;30m"
@@ -29,6 +29,8 @@
 int teclado;
 int result;
 bool closeApp;
+char **commands;
+int n_cmds;
 
 // Dinamic
 int write_kb;
