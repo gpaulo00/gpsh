@@ -3,9 +3,10 @@
 #include <sf2d.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define VERSION     "0.2"
-#define DEBUG_MODE  1
+#define DEBUG_MODE  0
 
 #define BLACK   "\x1b[0;30m"
 #define GRAY_   "\x1b[1;30m"
@@ -17,7 +18,7 @@
 #define COFFEE  "\x1b[0;33m"
 #define YELLOW  "\x1b[1;33m"
 #define GRAY    "\x1b[0;37m"
-#define WHITE   "\x1b[1;37m"
+#define WHITE   "\x1b[0m"
 
 #include <keyboards.h>
 
@@ -25,8 +26,12 @@
 #include <functions.h>
 
 //Variables Globales
-int write_kb;
 int teclado;
-char command[47];
 int result;
 bool closeApp;
+
+// Dinamic
+int write_kb;
+char *command;
+char *c_aux;
+int c_size;

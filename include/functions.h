@@ -12,11 +12,12 @@ void keyboard(touchPosition touch);
 //keyboard_functions.c
 void abc();
 void shift();
-void backspace();
-void printf_kb(char let[5]);
+int backspace();
+int printf_kb(char let[5]);
 void enter();
 
 //comands.c
 int hello();
 int close();
 int echo(char string[42]);
+int gpaulo();
