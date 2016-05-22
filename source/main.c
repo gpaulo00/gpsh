@@ -24,22 +24,29 @@ int main(int argc, char **argv)
     #if DEBUG_MODE == 1
         PrintConsole top2;
         consoleInit(GFX_TOP, &top2);
-        consoleSetWindow(&top2,48,0,3,3);
+        consoleSetWindow(&top2,2,25,50,3);
     #endif
     
     consoleSelect(&top);
     printf(CYAN "GP Shell v" VERSION "\n");
     printf(CYAN "Gustavo Paulo ");
     printf(YELLOW "<gustavo.paulo.segura@gmail.com>\n"); // \x1b[y;xH
+    printf(WHITE);
     prompt();
     
     // Main loop
     teclado=0;
-    write_kb=0;
     result=0;
     closeApp=false;
     touchPosition touch;
-    
+
+    write_kb=0;
+    c_size=1;
+    command=malloc(sizeof(char));
+    if(command == NULL){
+        printf(RED "Error allocating dynamic memory\n");
+        closeApp=true;
+    }
     while (aptMainLoop() && !closeApp) {
         //Scan all the inputs. This should be done once for each frame
         hidScanInput();
@@ -72,8 +79,7 @@ int main(int argc, char **argv)
         
         #if DEBUG_MODE == 1
             consoleSelect(&top2);
-            printf("\r%i", write_kb);
-            printf("\x1b[2;0H%i", result);
+            printf("\r%s",command);
         #endif
         
         consoleSelect(&top);

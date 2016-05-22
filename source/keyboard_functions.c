@@ -25,52 +25,78 @@ void shift() {
     }
 }
 
-void backspace() {
-    if(write_kb > 0) {printf("\b \b"); write_kb--; }
-}
-    
-void printf_kb(char let[5]) {
-    if(write_kb<47){
-        switch(teclado){
-            case 0 :
-                printf("%c", let[0]);
-                command[write_kb] = let[0];
-                break;
-            case 1 :
-                printf("%c", let[1]);
-                command[write_kb] = let[1];
-                break;
-            case 2 :
-                printf("%c", let[2]);
-                command[write_kb] = let[2];
-                break;
-            case 3 :
-                printf("%c", let[3]);
-                command[write_kb] = let[3];
-                break;
+int backspace() {
+    if(write_kb > 0) {
+        printf("\b \b");
+        write_kb--;
+        c_aux = realloc(command,(c_size-1)*sizeof(char));
+        if(c_aux==NULL){
+            closeApp=true;
+            return 2;
         }
-        write_kb++;
+        command = c_aux;
+        c_size--;
     }
+    return 0;
+}
+
+char c;
+
+int printf_kb(char let[5]) {
+    switch(teclado){
+        case 0 :
+            c = let[0];
+            break;
+        case 1 :
+            c = let[1];
+            break;
+        case 2 :
+            c = let[2];
+            break;
+        case 3 :
+            c = let[3];
+            break;
+    }
+    printf("%c", c);
+    c_aux = realloc(command,(c_size+1)*sizeof(char));
+    if(c_aux==NULL){
+        closeApp=true;
+        return 2;
+    }
+    c_size++;
+    command = c_aux;
+    command[write_kb++] = c;
+    return 0;
 }
 
 void enter(){
     //Process command
     printf("\n");
     if(prefix("hello",command)) {
-        result = hello();}
+        result = hello();
     //~ } else if(prefix("echo",command)) {
         //~ strncpy(args, command+5, 42);
         //~ result = echo();
     //~ }
-    else if(prefix("exit",command)) {
-        result = close();}
-    else {
+    }else if(prefix("exit",command)) {
+        result = close();
+    }else if(prefix("gpaulo",command)) {
+        result = gpaulo();
+    }else if(write_kb==0){
+        
+    } else {
         printf(RED "Command not found\n");
         printf(WHITE);
         result = -1;
     }
     write_kb = 0;
-    memset(command,0,46);
-    printf(GREEN "# ");
-    printf(WHITE);
+    c_size = 1;
+    c_aux = malloc(sizeof(char));
+    if(c_aux == NULL){
+        closeApp=true;
+    } else {
+        command = c_aux;
+        printf(GREEN "# ");
+        printf(WHITE);
+    }
 }
