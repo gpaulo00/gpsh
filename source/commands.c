@@ -1,5 +1,10 @@
 #include "main.h"
 
+/*
+Command declaration:
+int name_of_command(int argc, char **argv){}
+*/
+
 int hello(int argc, char **argv){
     printf(CYAN "I'm the first command!\n");
     return 0;
@@ -19,6 +24,17 @@ int quit(int argc, char **argv) {
     return 0;
 }
 
+//~ int pwd(int argc, char **argv) {
+    //~ system("pwd");
+    //~ return 0;
+//~ }
+
+int sys(int argc, char **argv){
+    char final[20];
+    osGetSystemVersionDataString(NULL,NULL,final,20);
+    printf("%s",final);
+    return 0;
+}
 char msg[4][29] = {"It's my nick! :v",
                    "Here!",
                    "I known you? :)",

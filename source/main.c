@@ -3,6 +3,10 @@
 // TOP      420x240 50x30
 // BOTTOM   320x240 40x30
 
+// String Bugfix (randoms characters at the begin)
+// system function
+// String Bugfix (character at the end)
+
 int main(int argc, char **argv)
 {
     //gfxInitDefault();
@@ -43,7 +47,7 @@ int main(int argc, char **argv)
 
     write_kb = 0;
     c_size = 1;
-    command = malloc(sizeof(char));
+    command = calloc(1,sizeof(char));
     if(command == NULL){
         printf(RED "Error allocating dynamic memory\n");
         closeApp=true;
@@ -80,7 +84,8 @@ int main(int argc, char **argv)
         
         #if DEBUG_MODE == 1
             consoleSelect(&top2);
-            printf("\r%s",command);
+            printf("\x1b[0;0\r%s",command);
+            printf("\x1b[2;2H%i",strlen(command));
         #endif
         
         consoleSelect(&top);

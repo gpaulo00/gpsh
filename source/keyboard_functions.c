@@ -117,15 +117,19 @@ int enter(){
                 result = quit(num, args);
             } else if(strcmp(*tokens,"gpaulo")==0){
                 result = gpaulo(num, args);
+            //~ } else if(strcmp(*tokens,"pwd")==0){
+                //~ result = pwd(num, args);
+            } else if(strcmp(*tokens,"system")==0){
+                result = sys(num, args);
             } else {
-                printf(RED "Command not found\n");
+                printf(RED "%s: command not found\n", *tokens);
                 result = -1;
             }
         }
     }
     write_kb = 0;
     c_size = 1;
-    c_aux = malloc(sizeof(char));
+    c_aux = calloc(1,sizeof(char));
     if(c_aux == NULL){
         printf(RED "Error allocating dynamic memory\n");
         closeApp = true;
