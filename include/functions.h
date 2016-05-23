@@ -22,3 +22,5 @@ int hello(int argc, char **argv);
 int quit(int argc, char **argv);
 int echo(int argc, char **argv);
 int gpaulo(int argc, char **argv);
+//~ int pwd(int argc, char **argv);
+int sys(int argc, char **argv);
