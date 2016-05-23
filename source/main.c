@@ -3,9 +3,9 @@
 // TOP      420x240 50x30
 // BOTTOM   320x240 40x30
 
-// String Bugfix (randoms characters at the begin)
-// system function
-// String Bugfix (character at the end)
+// Fixed backspace bugs:
+//   - The B button delete de prompt (fixed)
+//   - Backspace dont delete chars   (fixed)
 
 int main(int argc, char **argv)
 {
@@ -26,9 +26,11 @@ int main(int argc, char **argv)
     
     //Debug mode
     #if DEBUG_MODE == 1
-        PrintConsole top2;
+        PrintConsole top2, top3;
         consoleInit(GFX_TOP, &top2);
+        consoleInit(GFX_TOP, &top3);
         consoleSetWindow(&top2,2,25,50,3);
+        consoleSetWindow(&top3,40,0,10,5);
     #endif
     
     consoleSelect(&top);
@@ -47,6 +49,7 @@ int main(int argc, char **argv)
 
     write_kb = 0;
     c_size = 1;
+    //~ can_delete = false;
     command = calloc(1,sizeof(char));
     if(command == NULL){
         printf(RED "Error allocating dynamic memory\n");
@@ -57,7 +60,7 @@ int main(int argc, char **argv)
         hidScanInput();
         u32 kDown = hidKeysDown();
         if (kDown & KEY_START) {break;}
-        else if(kDown & KEY_B) {printf("\b \b");}       // Key B = Backspace
+        else if(kDown & KEY_B) { backspace();}       // Key B = Backspace
         else if(kDown & KEY_Y) { abc(&teclado); }       // Key Y = ABC/123
         else if(kDown & KEY_X) { shift(&teclado); }     // Key X = Shift
         else if(kDown & KEY_A) { enter(); }             // Key A = Enter
@@ -84,8 +87,9 @@ int main(int argc, char **argv)
         
         #if DEBUG_MODE == 1
             consoleSelect(&top2);
-            printf("\x1b[0;0\r%s",command);
-            printf("\x1b[2;2H%i",strlen(command));
+            printf("\r%s;%i",command,strlen(command));
+            consoleSelect(&top3);
+            printf("\r%i;%i",write_kb,c_size);//,can_delete ? "true" : "false");
         #endif
         
         consoleSelect(&top);
