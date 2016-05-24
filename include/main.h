@@ -30,7 +30,6 @@ int teclado;
 int result;
 bool closeApp;
 int n_cmds;
-//~ bool can_delete;
 
 // Dinamic
 int write_kb;
