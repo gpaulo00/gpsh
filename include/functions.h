@@ -11,6 +11,8 @@ bool prefix(const char *pre, const char *str);
 void keyboard(touchPosition touch);
 
 //keyboard_functions.c
+int up_history();
+int down_history();
 void abc();
 void shift();
 int backspace();
@@ -24,3 +26,4 @@ int echo(int argc, char **argv);
 int gpaulo(int argc, char **argv);
 //~ int pwd(int argc, char **argv);
 int sys(int argc, char **argv);
+int help(int argc, char **argv);

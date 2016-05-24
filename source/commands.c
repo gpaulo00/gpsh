@@ -44,3 +44,13 @@ int gpaulo(int argc, char **argv) {
     printf(CYAN "%s\n", msg[n]);
     return 0;
 }
+
+int help(int argc, char **argv) {
+    printf("Built-in commands:\n\
+  system   Show the system version\n\
+  echo     Display a line of text\n\
+  help     Display this information\n\
+  hello    The first command implemented\n\
+  gpaulo   My command :v\n");
+    return 0;
+}

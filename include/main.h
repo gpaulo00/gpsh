@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define VERSION     "0.2.9"
+#define VERSION     "0.3.0"
 #define DEBUG_MODE  0
 
 #define BLACK   "\x1b[0;30m"
@@ -20,6 +20,9 @@
 #define GRAY    "\x1b[0;37m"
 #define WHITE   "\x1b[0m"
 
+// Pilas
+#include <pila.h>
+
 #include <keyboards.h>
 
 //Funciones Externas
@@ -30,6 +33,10 @@ int teclado;
 int result;
 bool closeApp;
 int n_cmds;
+
+// Historial
+Pila *history;
+int h_index;
 
 // Dinamic
 int write_kb;

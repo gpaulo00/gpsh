@@ -1,5 +1,65 @@
 #include <main.h>
 
+int up_history() {
+    Elemento *now;
+    now = history->begin;
+    if(h_index < (history->size-1)){
+        h_index++;
+        for(int i=0;i<h_index;i++){
+            now=now->next;
+        }
+        printf("\r                                            \r");
+        prompt();
+        printf("%s", now->data);
+        
+        write_kb = strlen(now->data);
+        c_size = write_kb+1;
+        c_aux = calloc(write_kb, sizeof(char));
+        if(c_aux==NULL){
+            printf(RED "Error allocating dynamic memory\n");
+            closeApp=true;
+            return 2;
+        }
+        command = c_aux;
+        strcpy(command, now->data);
+        
+    }
+    return 0;
+}
+
+int down_history() {
+    Elemento *now;
+    char *res;
+    now = history->begin;
+    if(h_index>0){
+        h_index--;
+        for(int i=0;i<h_index;i++){
+            now=now->next;
+        }
+        res=now->data;
+        write_kb = strlen(res);
+        c_size = write_kb+1;
+        c_aux = calloc(write_kb, sizeof(char));
+    } else {
+        res="";
+        write_kb = 0;
+        c_size = 1;
+        c_aux = calloc(1, sizeof(char));
+    }
+    printf("\r                                            \r");
+    prompt();
+    printf("%s", res);
+    
+    if(c_aux==NULL){
+        printf(RED "Error allocating dynamic memory\n");
+        closeApp=true;
+        return 2;
+    }
+    command = c_aux;
+    if(h_index>0){strcpy(command, res);}
+    return 0;
+}
+
 void abc(){
     if(teclado==2 || teclado==3) {
         teclado=0;
@@ -76,6 +136,7 @@ int printf_kb(char let[5]) {
 int enter(){
     //Process command
     printf("\n");
+    push(history, command);
     char **tokens, **copy, **args;
     
     if(write_kb!=0){
@@ -119,6 +180,8 @@ int enter(){
                 result = quit(num, args);
             } else if(strcmp(*tokens,"gpaulo")==0){
                 result = gpaulo(num, args);
+            } else if(strcmp(*tokens,"help")==0){
+                result = help(num, args);
             //~ } else if(strcmp(*tokens,"pwd")==0){
                 //~ result = pwd(num, args);
             } else if(strcmp(*tokens,"system")==0){
@@ -129,7 +192,9 @@ int enter(){
             }
         }
     }
+    
     write_kb = 0;
+    h_index = -1;
     c_size = 1;
     c_aux = calloc(1,sizeof(char));
     if(c_aux == NULL){

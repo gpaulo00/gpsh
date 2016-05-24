@@ -3,9 +3,9 @@
 // TOP      420x240 50x30
 // BOTTOM   320x240 40x30
 
-// Fixed backspace bugs:
-//   - The B button delete de prompt (fixed)
-//   - Backspace dont delete chars   (fixed)
+// Añadido comando help
+// Añadido funcion de historial
+// Botones arriba/abajo para moverse en el historial
 
 int main(int argc, char **argv)
 {
@@ -53,6 +53,18 @@ int main(int argc, char **argv)
         printf(RED "Error allocating dynamic memory\n");
         closeApp=true;
     }
+    
+    //Test Historial
+    history = malloc(sizeof(Pila));
+    if(history == NULL){
+        printf(RED "Error allocating dynamic memory\n");
+        closeApp=true;
+    }
+    h_index=-1;
+    initial(history);
+    
+    //Fin
+    
     while (aptMainLoop() && !closeApp) {
         //Scan all the inputs. This should be done once for each frame
         hidScanInput();
@@ -62,6 +74,8 @@ int main(int argc, char **argv)
         else if(kDown & KEY_Y) { abc(); }       // Key Y = ABC/123
         else if(kDown & KEY_X) { shift(); }     // Key X = Shift
         else if(kDown & KEY_A) { enter(); }             // Key A = Enter
+        else if(kDown & KEY_DUP) { up_history(); }
+        else if(kDown & KEY_DDOWN) { down_history(); }
         hidTouchRead(&touch);
 
         keyboard(touch);
@@ -85,9 +99,11 @@ int main(int argc, char **argv)
         
         #if DEBUG_MODE == 1
             consoleSelect(&top2);
-            printf("\r%s;%i",command,strlen(command));
+            //~ printf("\r%s;%i",command,strlen(command));
+            printf("\r");
+            show(history);
             consoleSelect(&top3);
-            printf("\r%i;%i",write_kb,c_size);
+            printf("\r%i;%i",h_index,history->size);
         #endif
         
         consoleSelect(&top);
