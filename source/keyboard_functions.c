@@ -26,7 +26,7 @@ void shift() {
 }
 
 int backspace() {
-    if(write_kb==0){
+    if(write_kb!=0){
         printf("\b \b");
         c_aux = calloc(write_kb--,sizeof(char));
         if(c_aux==NULL){
@@ -39,7 +39,6 @@ int backspace() {
         }
         command = c_aux;
         c_size--;
-        //~ if(write_kb==0){can_delete=false;}
     }
     return 0;
 }
@@ -71,7 +70,6 @@ int printf_kb(char let[5]) {
     c_size++;
     command = c_aux;
     command[write_kb++] = c;
-    //~ can_delete=true;
     return 0;
 }
 
@@ -133,7 +131,6 @@ int enter(){
     }
     write_kb = 0;
     c_size = 1;
-    //~ can_delete=false;
     c_aux = calloc(1,sizeof(char));
     if(c_aux == NULL){
         printf(RED "Error allocating dynamic memory\n");

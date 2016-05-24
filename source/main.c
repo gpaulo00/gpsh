@@ -15,7 +15,6 @@ int main(int argc, char **argv)
     //Set the background color
     //sf2d_set_clear_color(RGBA8(0xFF, 0xff, 0xFF, 0xFF));
  
-    //sf2d_texture *dark = sf2d_create_texture_mem_RGBA8(darkrai.pixel_data, darkrai.width, darkrai.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
     sf2d_texture *min = sf2d_create_texture_mem_RGBA8(minus.pixel_data, minus.width, minus.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
     sf2d_texture *may = sf2d_create_texture_mem_RGBA8(mayus.pixel_data, mayus.width, mayus.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
     sf2d_texture *sim1 = sf2d_create_texture_mem_RGBA8(simbolos1.pixel_data, simbolos1.width, simbolos1.height, TEXFMT_RGBA8, SF2D_PLACE_RAM);
@@ -49,7 +48,6 @@ int main(int argc, char **argv)
 
     write_kb = 0;
     c_size = 1;
-    //~ can_delete = false;
     command = calloc(1,sizeof(char));
     if(command == NULL){
         printf(RED "Error allocating dynamic memory\n");
@@ -61,8 +59,8 @@ int main(int argc, char **argv)
         u32 kDown = hidKeysDown();
         if (kDown & KEY_START) {break;}
         else if(kDown & KEY_B) { backspace();}       // Key B = Backspace
-        else if(kDown & KEY_Y) { abc(&teclado); }       // Key Y = ABC/123
-        else if(kDown & KEY_X) { shift(&teclado); }     // Key X = Shift
+        else if(kDown & KEY_Y) { abc(); }       // Key Y = ABC/123
+        else if(kDown & KEY_X) { shift(); }     // Key X = Shift
         else if(kDown & KEY_A) { enter(); }             // Key A = Enter
         hidTouchRead(&touch);
 
@@ -89,13 +87,12 @@ int main(int argc, char **argv)
             consoleSelect(&top2);
             printf("\r%s;%i",command,strlen(command));
             consoleSelect(&top3);
-            printf("\r%i;%i",write_kb,c_size);//,can_delete ? "true" : "false");
+            printf("\r%i;%i",write_kb,c_size);
         #endif
         
         consoleSelect(&top);
         sf2d_swapbuffers();
     }
-    //~ sf2d_free_texture(dark);
     sf2d_free_texture(min);
     sf2d_free_texture(may);
     sf2d_free_texture(sim1);
