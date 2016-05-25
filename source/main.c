@@ -3,9 +3,9 @@
 // TOP      420x240 50x30
 // BOTTOM   320x240 40x30
 
-// Añadido comando help
-// Añadido funcion de historial
-// Botones arriba/abajo para moverse en el historial
+// Fix memory leaks
+// The blank lines don't be added to the history
+// Added variables (wip)
 
 int main(int argc, char **argv)
 {
@@ -54,7 +54,6 @@ int main(int argc, char **argv)
         closeApp=true;
     }
     
-    //Test Historial
     history = malloc(sizeof(Pila));
     if(history == NULL){
         printf(RED "Error allocating dynamic memory\n");
@@ -62,8 +61,6 @@ int main(int argc, char **argv)
     }
     h_index=-1;
     initial(history);
-    
-    //Fin
     
     while (aptMainLoop() && !closeApp) {
         //Scan all the inputs. This should be done once for each frame
@@ -109,6 +106,11 @@ int main(int argc, char **argv)
         consoleSelect(&top);
         sf2d_swapbuffers();
     }
+    
+    free(command);
+    free(c_aux);
+    free(history);
+    
     sf2d_free_texture(min);
     sf2d_free_texture(may);
     sf2d_free_texture(sim1);

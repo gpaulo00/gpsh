@@ -136,10 +136,10 @@ int printf_kb(char let[5]) {
 int enter(){
     //Process command
     printf("\n");
-    push(history, command);
     char **tokens, **copy, **args;
     
     if(write_kb!=0){
+        push(history, command);
         char *cmd = malloc(sizeof(char)*strlen(command));
         strcpy(cmd, command);
         copy = str_split(command, ' ');
@@ -152,7 +152,6 @@ int enter(){
                 #endif
                 free(*(copy + num));
             }
-            free(copy);
 
             tokens = str_split(cmd, ' ');
             if(num>0) {
@@ -190,7 +189,10 @@ int enter(){
                 printf(RED "%s: command not found\n", *tokens);
                 result = -1;
             }
+            free(args);
+            free(tokens);
         }
+        free(copy);
     }
     
     write_kb = 0;
