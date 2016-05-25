@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define VERSION     "0.3.0"
-#define DEBUG_MODE  0
+#define VERSION     "0.3.1"
+#define DEBUG_MODE  1
 
 #define BLACK   "\x1b[0;30m"
 #define GRAY_   "\x1b[1;30m"
@@ -20,19 +20,19 @@
 #define GRAY    "\x1b[0;37m"
 #define WHITE   "\x1b[0m"
 
-// Pilas
 #include <pila.h>
-
 #include <keyboards.h>
 
 //Funciones Externas
 #include <functions.h>
+#include <commands.h>
 
 //Variables Globales
 int teclado;
 int result;
 bool closeApp;
 int n_cmds;
+//~ char **vars;
 
 // Historial
 Pila *history;
