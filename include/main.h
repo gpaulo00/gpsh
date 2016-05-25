@@ -6,7 +6,7 @@
 #include <time.h>
 
 #define VERSION     "0.3.1"
-#define DEBUG_MODE  1
+#define DEBUG_MODE  0
 
 #define BLACK   "\x1b[0;30m"
 #define GRAY_   "\x1b[1;30m"
