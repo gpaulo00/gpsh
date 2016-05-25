@@ -32,7 +32,7 @@ int teclado;
 int result;
 bool closeApp;
 int n_cmds;
-//~ char **vars;
+char **vars;
 
 // Historial
 Pila *history;
