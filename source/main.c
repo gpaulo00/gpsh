@@ -4,8 +4,9 @@
 // BOTTOM   320x240 40x30
 
 // Fix memory leaks
-// The blank lines don't be added to the history
+// The empty lines don't be added to the history
 // Added variables (wip)
+// Fixed the blank prompt when the buffer is empty
 
 int main(int argc, char **argv)
 {

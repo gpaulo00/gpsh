@@ -206,7 +206,6 @@ int enter(){
     } else {
         command = c_aux;
     }
-    printf(GREEN "# ");
-    printf(WHITE);
+    prompt();
     return 0;
 }

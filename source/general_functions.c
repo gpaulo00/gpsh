@@ -69,7 +69,7 @@ void prompt(){
     printf(WHITE);
 }
 
-bool prefix(const char *pre, const char *str)
-{
-    return strncmp(pre, str, strlen(pre)) == 0;
-}
+//~ bool prefix(const char *pre, const char *str)
+//~ {
+    //~ return strncmp(pre, str, strlen(pre)) == 0;
+//~ }
