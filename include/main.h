@@ -20,6 +20,8 @@
 #define GRAY    "\x1b[0;37m"
 #define WHITE   "\x1b[0m"
 
+#define INCREMENT 5
+
 #include <pila.h>
 #include <keyboards.h>
 
@@ -32,7 +34,15 @@ int teclado;
 int result;
 bool closeApp;
 int n_cmds;
-char **vars;
+
+//~ typedef struct VariablesStruct{ 
+    //~ char **names;
+    //~ char **values;
+    //~ int size;
+    //~ int used;
+//~ } ListVariables;
+
+//~ ListVariables vars;
 
 // Historial
 Pila *history;

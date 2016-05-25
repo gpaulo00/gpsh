@@ -7,6 +7,9 @@ void prompt();
 //~ bool prefix(const char *pre, const char *str);
 //~ char * getargs(char string[47], int lcom);
 
+//variables.c
+//~ int set_variable(char *name, char *value);
+
 //keyboard.c
 void keyboard(touchPosition touch);
 

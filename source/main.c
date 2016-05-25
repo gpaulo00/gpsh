@@ -46,23 +46,26 @@ int main(int argc, char **argv)
     closeApp = false;
     touchPosition touch;
     srand(time(NULL));
-
+    
+    //~ vars->names = calloc(INCREMENT,sizeof(char));
+    //~ vars->values = calloc(INCREMENT,sizeof(char));
+    printf("ok");
+    command = calloc(1,sizeof(char));
+    history = malloc(sizeof(Pila));
+    printf("ok");
+    if(/*vars->names==NULL || vars->values==NULL || */command==NULL || history==NULL){
+        printf(RED "Error allocating dynamic memory\n");
+        closeApp=true;
+    }
+    printf("ok");
     write_kb = 0;
     c_size = 1;
-    command = calloc(1,sizeof(char));
-    if(command == NULL){
-        printf(RED "Error allocating dynamic memory\n");
-        closeApp=true;
-    }
-    
-    history = malloc(sizeof(Pila));
-    if(history == NULL){
-        printf(RED "Error allocating dynamic memory\n");
-        closeApp=true;
-    }
     h_index=-1;
     initial(history);
+    printf("ok");
     
+    //~ set_variable("AUTHOR", "gpaulo00");
+
     while (aptMainLoop() && !closeApp) {
         //Scan all the inputs. This should be done once for each frame
         hidScanInput();
@@ -105,12 +108,15 @@ int main(int argc, char **argv)
         #endif
         
         consoleSelect(&top);
+        gfxFlushBuffers();
         sf2d_swapbuffers();
     }
     
     free(command);
     free(c_aux);
     free(history);
+    //~ free(vars->names);
+    //~ free(vars->values);
     
     sf2d_free_texture(min);
     sf2d_free_texture(may);

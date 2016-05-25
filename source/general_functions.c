@@ -64,6 +64,7 @@ bool touchInBox(touchPosition touch, int x, int y, int w, int h){
 }
 
 void prompt(){
+    gfxFlushBuffers();
     printf(GREEN "# ");
     gfxFlushBuffers();
     printf(WHITE);

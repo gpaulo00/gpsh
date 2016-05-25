@@ -187,6 +187,8 @@ int enter(){
                 result = sys(num, args);
             } else {
                 printf(RED "%s: command not found\n", *tokens);
+                gfxFlushBuffers();
+                printf(WHITE);
                 result = -1;
             }
             free(args);
