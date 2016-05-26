@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define VERSION     "0.3.1"
+#define VERSION     "0.3.2" //Next: 0.3.4
 #define DEBUG_MODE  1
 
 #define BLACK   "\x1b[0;30m"
