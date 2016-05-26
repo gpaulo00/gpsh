@@ -55,9 +55,33 @@ int help(int argc, char **argv) {
     return 0;
 }
 
+void __set_func() { for(int i=0; i<var_used; i++){printf("%s=%s\n", var_names[i], var_values[i]);} }
+
 int set(int argc, char **argv){
-    for(int i=0; i<var_used; i++){
-        printf("%s=%s\n", var_names[i], var_values[i]);
-    }
+    if(argc == 1){
+        char **tmp, **tokens, *buf;
+        //~ printf("%s;%i\n", argv[0],strlen(argv[0]));
+        buf = calloc(strlen(argv[0]),sizeof(char));
+        if(buf==NULL){printf(RED "Error allocating dynamic memory in set()\n"); closeApp=true; return 2;}
+        strcpy(buf, argv[0]);
+        tmp = str_split(argv[0], '=');
+        if(tmp){
+            int num;
+            for (num = 0; *(tmp + num); num++) {
+                #if DEBUG_MODE == 1
+                    printf("tmp[%i]: %s\n", num, *(tmp+num));
+                #endif
+                free(*(tmp + num));
+            }
+            #if DEBUG_MODE == 1
+                printf("num: %i\n", num);
+            #endif
+            if(num!=2){ return 5; }
+            tokens = str_split(buf, '=');
+            set_variable(tokens[0], tokens[1]);
+            //~ free(tokens);
+        }
+        free(tmp);
+    } else { __set_func(); }
     return 0;
 }

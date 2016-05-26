@@ -5,8 +5,13 @@
 
 // Fix memory leaks
 // The empty lines don't be added to the history
-// Added variables ($VAR for use, cant define variables yet)
 // Fixed the blank prompt when the buffer is empty
+// The errors of dynamic memory now are more specific
+
+// Added variables ($VARNAME for use)
+// Define variables with set_variables()
+// Define variables with set command (usage: set NAME=VALUE) (testing)
+// set_variables() can now change the variables defined (in progress)
 
 int main(int argc, char **argv)
 {
@@ -54,7 +59,7 @@ int main(int argc, char **argv)
     history = malloc(sizeof(Pila));
     
     if(var_names==NULL || var_values==NULL || command==NULL || history==NULL){
-        printf(RED "Error allocating dynamic memory\n");
+        printf(RED "Error allocating dynamic memory in main()\n");
         closeApp=true;
     }
     write_kb = 0;

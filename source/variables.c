@@ -5,7 +5,7 @@ int set_variable(char *name, char *value){
         char **aux, **aux2;
         aux = realloc(var_names, INCREMENT * sizeof(char *));
         aux2 = realloc(var_values, INCREMENT * sizeof(char *));
-        if(aux==NULL||aux2==NULL){printf(RED "Error allocating dynamic memory\n"); closeApp=true; return 2;}
+        if(aux==NULL||aux2==NULL){printf(RED "Error allocating dynamic memory in set_variable()\n"); closeApp=true; return 2;}
         
         var_size += INCREMENT;
         var_names = aux;

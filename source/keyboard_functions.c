@@ -167,7 +167,7 @@ int enter(){
             tokens = str_split(cmd, ' ');
             if(num>0) {
                 args = malloc(sizeof(char*) * num-1);
-                if(args==NULL){printf(RED "Error allocating dynamic memory\n"); closeApp=true; return 2;}
+                if(args==NULL){printf(RED "Error allocating dynamic memory in enter()\n"); closeApp=true; return 2;}
                 
                 for(int i=0;i<num;i++){
                     #if DEBUG_MODE == 1
@@ -206,7 +206,7 @@ int enter(){
     c_size = 1;
     c_aux = calloc(1,sizeof(char));
     if(c_aux == NULL){
-        printf(RED "Error allocating dynamic memory\n");
+        printf(RED "Error allocating dynamic memory in enter()\n");
         closeApp = true;
         return 3;
     } else {
