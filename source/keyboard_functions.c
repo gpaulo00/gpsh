@@ -140,6 +140,17 @@ int enter(){
     
     if(write_kb!=0){
         push(history, command);
+        
+        //Testing
+        char *buffer;
+        for(int varn=0; varn<var_used; varn++){
+            buffer = malloc( (strlen(var_names[varn])+1) * sizeof(char) );
+            sprintf(buffer, "$%s", var_names[varn]);
+            strcpy(command, replace_str(command, buffer, var_values[varn]));
+            free(buffer);
+        }
+        //End
+        
         char *cmd = malloc(sizeof(char)*strlen(command));
         strcpy(cmd, command);
         copy = str_split(command, ' ');
@@ -171,21 +182,14 @@ int enter(){
             #if DEBUG_MODE == 1
                 printf("num: %i\n", num);
             #endif
-            if(strcmp(*tokens,"hello")==0){
-                result = hello(num, args);
-            } else if(strcmp(*tokens,"echo")==0){
-                result = echo(num, args);
-            } else if(strcmp(*tokens,"exit")==0 || strcmp(*tokens,"quit")==0){
-                result = quit(num, args);
-            } else if(strcmp(*tokens,"gpaulo")==0){
-                result = gpaulo(num, args);
-            } else if(strcmp(*tokens,"help")==0){
-                result = help(num, args);
-            //~ } else if(strcmp(*tokens,"pwd")==0){
-                //~ result = pwd(num, args);
-            } else if(strcmp(*tokens,"system")==0){
-                result = sys(num, args);
-            } else {
+            if(strcmp(*tokens,"hello")==0){ result = hello(num, args); }
+            else if(strcmp(*tokens,"echo")==0){ result = echo(num, args); }
+            else if(strcmp(*tokens,"exit")==0 || strcmp(*tokens,"quit")==0){ result = quit(num, args); }
+            else if(strcmp(*tokens,"gpaulo")==0){ result = gpaulo(num, args); }
+            else if(strcmp(*tokens,"help")==0){ result = help(num, args); }
+            else if(strcmp(*tokens,"system")==0){ result = sys(num, args); }
+            else if(strcmp(*tokens,"set")==0){ result = set(num, args); }
+            else {
                 printf(RED "%s: command not found\n", *tokens);
                 gfxFlushBuffers();
                 printf(WHITE);

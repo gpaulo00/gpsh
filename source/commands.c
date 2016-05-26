@@ -54,3 +54,10 @@ int help(int argc, char **argv) {
   gpaulo   My command :v\n");
     return 0;
 }
+
+int set(int argc, char **argv){
+    for(int i=0; i<var_used; i++){
+        printf("%s=%s\n", var_names[i], var_values[i]);
+    }
+    return 0;
+}

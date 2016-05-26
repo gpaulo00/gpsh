@@ -2,13 +2,15 @@
 
 //general_functions.c
 char** str_split(char* a_str, const char a_delim);
+char *replace_str(char *str, char *orig, char *rep);
 bool touchInBox(touchPosition touch, int x, int y, int w, int h);
 void prompt();
 //~ bool prefix(const char *pre, const char *str);
 //~ char * getargs(char string[47], int lcom);
 
 //variables.c
-//~ int set_variable(char *name, char *value);
+int set_variable(char *name, char *value);
+void show_vars();
 
 //keyboard.c
 void keyboard(touchPosition touch);

@@ -1,6 +1,9 @@
 
 // Implemented Commands
 
+// Show the defined variables (dont args yet)
+int set(int argc, char **argv);
+
 // Show a message (dont args)
 int hello(int argc, char **argv);
 

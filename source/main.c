@@ -5,7 +5,7 @@
 
 // Fix memory leaks
 // The empty lines don't be added to the history
-// Added variables (wip)
+// Added variables ($VAR for use, cant define variables yet)
 // Fixed the blank prompt when the buffer is empty
 
 int main(int argc, char **argv)
@@ -47,24 +47,26 @@ int main(int argc, char **argv)
     touchPosition touch;
     srand(time(NULL));
     
-    //~ vars->names = calloc(INCREMENT,sizeof(char));
-    //~ vars->values = calloc(INCREMENT,sizeof(char));
-    printf("ok");
+    var_names = calloc(INITIAL,sizeof(char));
+    var_values = calloc(INITIAL,sizeof(char));
+    
     command = calloc(1,sizeof(char));
     history = malloc(sizeof(Pila));
-    printf("ok");
-    if(/*vars->names==NULL || vars->values==NULL || */command==NULL || history==NULL){
+    
+    if(var_names==NULL || var_values==NULL || command==NULL || history==NULL){
         printf(RED "Error allocating dynamic memory\n");
         closeApp=true;
     }
-    printf("ok");
     write_kb = 0;
     c_size = 1;
+    
+    var_size = INITIAL;
+    var_used = 0;
+    
     h_index=-1;
     initial(history);
-    printf("ok");
     
-    //~ set_variable("AUTHOR", "gpaulo00");
+    set_variable("AUTHOR", "gpaulo00");
 
     while (aptMainLoop() && !closeApp) {
         //Scan all the inputs. This should be done once for each frame
@@ -99,12 +101,13 @@ int main(int argc, char **argv)
         sf2d_end_frame();
         
         #if DEBUG_MODE == 1
-            consoleSelect(&top2);
+            //~ consoleSelect(&top2);
             //~ printf("\r%s;%i",command,strlen(command));
+            //~ printf("\r");
+            //~ show(history);
+            consoleSelect(&top2);
             printf("\r");
-            show(history);
-            consoleSelect(&top3);
-            printf("\r%i;%i",h_index,history->size);
+            show_vars();
         #endif
         
         consoleSelect(&top);
