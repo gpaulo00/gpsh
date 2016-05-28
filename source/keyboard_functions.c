@@ -136,10 +136,21 @@ int printf_kb(char let[5]) {
 int enter(){
     //Process command
     printf("\n");
-    char **tokens, **copy, **args;
+    char **copy, **args;
     
     if(write_kb!=0){
         push(history, command);
+        
+        //Testing
+        char *buffer;
+        for(int varn=0; varn<var_used; varn++){
+            buffer = malloc( (strlen(var_names[varn])+1) * sizeof(char) );
+            sprintf(buffer, "$%s", var_names[varn]);
+            strcpy(command, replace_str(command, buffer, var_values[varn]));
+            free(buffer);
+        }
+        //End
+        
         char *cmd = malloc(sizeof(char)*strlen(command));
         strcpy(cmd, command);
         copy = str_split(command, ' ');
@@ -153,44 +164,26 @@ int enter(){
                 free(*(copy + num));
             }
 
-            tokens = str_split(cmd, ' ');
-            if(num>0) {
-                args = malloc(sizeof(char*) * num-1);
-                if(args==NULL){printf(RED "Error allocating dynamic memory\n"); closeApp=true; return 2;}
-                
-                for(int i=0;i<num;i++){
-                    #if DEBUG_MODE == 1
-                        printf("args[%i]: %s\n", i, *(tokens + (i+1)));
-                    #endif
-                    *(args + i)=*(tokens + (i+1));
-                }
-            } else {
-                args = malloc(sizeof(char*));
-            }
-            num--;
+            args = str_split(cmd, ' ');
             #if DEBUG_MODE == 1
                 printf("num: %i\n", num);
             #endif
-            if(strcmp(*tokens,"hello")==0){
-                result = hello(num, args);
-            } else if(strcmp(*tokens,"echo")==0){
-                result = echo(num, args);
-            } else if(strcmp(*tokens,"exit")==0 || strcmp(*tokens,"quit")==0){
-                result = quit(num, args);
-            } else if(strcmp(*tokens,"gpaulo")==0){
-                result = gpaulo(num, args);
-            } else if(strcmp(*tokens,"help")==0){
-                result = help(num, args);
-            //~ } else if(strcmp(*tokens,"pwd")==0){
-                //~ result = pwd(num, args);
-            } else if(strcmp(*tokens,"system")==0){
-                result = sys(num, args);
-            } else {
-                printf(RED "%s: command not found\n", *tokens);
+            if(strcmp(*args,"hello")==0){ result = hello(num, args); }
+            else if(strcmp(*args,"echo")==0){ result = echo(num, args); }
+            else if(strcmp(*args,"exit")==0 || strcmp(*args,"quit")==0){ result = quit(num, args); }
+            else if(strcmp(*args,"gpaulo")==0){ result = gpaulo(num, args); }
+            else if(strcmp(*args,"help")==0){ result = help(num, args); }
+            else if(strcmp(*args,"system")==0){ result = sys(num, args); }
+            else if(strcmp(*args,"set")==0){ result = set(num, args); }
+            else if(strcmp(*args,"unset")==0){ result = unset(num, args); }
+            else {
+                printf(RED "%s: command not found\n", *args);
+                gfxFlushBuffers();
+                printf(WHITE);
                 result = -1;
             }
             free(args);
-            free(tokens);
+            //~ free(tokens);
         }
         free(copy);
     }
@@ -200,7 +193,7 @@ int enter(){
     c_size = 1;
     c_aux = calloc(1,sizeof(char));
     if(c_aux == NULL){
-        printf(RED "Error allocating dynamic memory\n");
+        printf(RED "Error allocating dynamic memory in enter()\n");
         closeApp = true;
         return 3;
     } else {

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define VERSION     "0.3.1"
+#define VERSION     "0.3.6"
 #define DEBUG_MODE  0
 
 #define BLACK   "\x1b[0;30m"
@@ -20,6 +20,10 @@
 #define GRAY    "\x1b[0;37m"
 #define WHITE   "\x1b[0m"
 
+// Variables Internas
+#define INITIAL   3
+#define INCREMENT 5
+
 #include <pila.h>
 #include <keyboards.h>
 
@@ -32,7 +36,12 @@ int teclado;
 int result;
 bool closeApp;
 int n_cmds;
-char **vars;
+
+// Variables Shell
+char **var_names;
+char **var_values;
+int var_size;
+int var_used;
 
 // Historial
 Pila *history;
