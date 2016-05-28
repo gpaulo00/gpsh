@@ -59,9 +59,6 @@ int help(int argc, char **argv) {
 
 int set(int argc, char **argv){
     if(argc == 2){
-        if(exist_variable(argv[1]) != -1){
-            unset(2, argv);
-        }
         char **tmp, **tokens, *buf;
         //~ printf("%s;%i\n", argv[0],strlen(argv[0]));
         buf = calloc(strlen(argv[1]),sizeof(char));
@@ -81,6 +78,9 @@ int set(int argc, char **argv){
             #endif
             if(num!=2){ return 5; }
             tokens = str_split(buf, '=');
+            if(exist_variable(tokens[0]) != -1){
+                unset_variable(tokens[0]);
+            }
             set_variable(tokens[0], tokens[1]);
             //~ free(tokens);
         }
@@ -93,15 +93,7 @@ int set(int argc, char **argv){
 
 int unset(int argc, char **argv){
     if(argc==2){
-        int n;
-        if( (n=exist_variable(argv[1])) != -1){
-            #if DEBUG_MODE == 1
-                printf("%s: %s\n", argv[1], var_values[n]);
-            #endif
-            var_names[n] = "\0";
-            var_values[n] = "\0";
-            var_used--;
-        }
+        unset_variable(argv[1]);
     }
     return 0;
 }

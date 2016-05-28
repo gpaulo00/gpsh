@@ -3,19 +3,14 @@
 // TOP      420x240 50x30
 // BOTTOM   320x240 40x30
 
-// Fix memory leaks
-// The empty lines don't be added to the history
-// Fixed the blank prompt when the buffer is empty
-// The errors of dynamic memory now are more specific
-
 // Added variables ($VARNAME for use)
 // Define variables with set_variables()
 // Define variables with set command (usage: set NAME=VALUE) (testing)
 // Delete variables
-// Change variables (Delete & Set, not directly)
+// Change variables
 
 // Commands now get his name on the args (C-style)
-// Bug two spaces
+// Bug two spaces (fixing)
 
 int main(int argc, char **argv)
 {
