@@ -10,6 +10,8 @@ void prompt();
 
 //variables.c
 int set_variable(char *name, char *value);
+int unset_variable(char *name);
+int exist_variable(char *name);
 void show_vars();
 
 //keyboard.c

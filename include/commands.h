@@ -1,8 +1,11 @@
 
 // Implemented Commands
 
-// Show the defined variables (dont args yet)
+// Show the defined variables / Define variables
 int set(int argc, char **argv);
+
+// Delete a variable
+int unset(int argc, char **argv);
 
 // Show a message (dont args)
 int hello(int argc, char **argv);

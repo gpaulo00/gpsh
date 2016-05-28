@@ -11,7 +11,11 @@
 // Added variables ($VARNAME for use)
 // Define variables with set_variables()
 // Define variables with set command (usage: set NAME=VALUE) (testing)
-// set_variables() can now change the variables defined (in progress)
+// Delete variables
+// Change variables (Delete & Set, not directly)
+
+// Commands now get his name on the args (C-style)
+// Bug two spaces
 
 int main(int argc, char **argv)
 {
@@ -72,7 +76,9 @@ int main(int argc, char **argv)
     initial(history);
     
     set_variable("AUTHOR", "gpaulo00");
-
+    set_variable("MARICO", "meignen");
+    unset_variable("MARICO");
+    
     while (aptMainLoop() && !closeApp) {
         //Scan all the inputs. This should be done once for each frame
         hidScanInput();

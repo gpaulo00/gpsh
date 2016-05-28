@@ -3,6 +3,8 @@
 /*
 Command declaration:
 int name_of_command(int argc, char **argv){}
+
+Example set(2, ["set", "AUTHOR=gpaulo00"]);
 */
 
 int hello(int argc, char **argv){
@@ -11,7 +13,7 @@ int hello(int argc, char **argv){
 }
 
 int echo(int argc, char **argv) {
-    for(int i=0;i<argc;i++){
+    for(int i=1;i<argc;i++){
         printf("%s ", *(argv+i));
     }
     printf("\n");
@@ -55,16 +57,17 @@ int help(int argc, char **argv) {
     return 0;
 }
 
-void __set_func() { for(int i=0; i<var_used; i++){printf("%s=%s\n", var_names[i], var_values[i]);} }
-
 int set(int argc, char **argv){
-    if(argc == 1){
+    if(argc == 2){
+        if(exist_variable(argv[1]) != -1){
+            unset(2, argv);
+        }
         char **tmp, **tokens, *buf;
         //~ printf("%s;%i\n", argv[0],strlen(argv[0]));
-        buf = calloc(strlen(argv[0]),sizeof(char));
+        buf = calloc(strlen(argv[1]),sizeof(char));
         if(buf==NULL){printf(RED "Error allocating dynamic memory in set()\n"); closeApp=true; return 2;}
-        strcpy(buf, argv[0]);
-        tmp = str_split(argv[0], '=');
+        strcpy(buf, argv[1]);
+        tmp = str_split(argv[1], '=');
         if(tmp){
             int num;
             for (num = 0; *(tmp + num); num++) {
@@ -82,6 +85,23 @@ int set(int argc, char **argv){
             //~ free(tokens);
         }
         free(tmp);
-    } else { __set_func(); }
+    } else {
+        for(int i=0; i<var_used; i++){printf("%s=%s\n", var_names[i], var_values[i]);}
+    }
+    return 0;
+}
+
+int unset(int argc, char **argv){
+    if(argc==2){
+        int n;
+        if( (n=exist_variable(argv[1])) != -1){
+            #if DEBUG_MODE == 1
+                printf("%s: %s\n", argv[1], var_values[n]);
+            #endif
+            var_names[n] = "\0";
+            var_values[n] = "\0";
+            var_used--;
+        }
+    }
     return 0;
 }
